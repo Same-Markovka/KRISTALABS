@@ -1,8 +1,5 @@
 package Facade;
 
-import Typeofdata.News;
-import controllers.ControllerNews;
-
 import java.util.ArrayList;
 
 public interface FacadeInteface {

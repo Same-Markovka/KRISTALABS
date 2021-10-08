@@ -1,18 +1,19 @@
 package controllers;
 
-import Typeofdata.News;
+import BO.BisnesObjectNews;
+import DO.NewsDo;
 
 import java.util.ArrayList;
 
 public interface InterfaceNewsController {
 
-    default void addnewnew(String text) {}
+    void addnewnew(BisnesObjectNews bo);
 
-    default News getnewbytext(String text) {
+    default BisnesObjectNews getnewbytext(String text) {
         return null;
     }
 
-    default ArrayList<News> getnewslist() {
+    default ArrayList<BisnesObjectNews> getnewslist() {
         return null;
     }
 

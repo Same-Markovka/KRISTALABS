@@ -1,27 +1,24 @@
 package controllers;
 
+import BO.BisnesObjectCategory;
+import DO.CategoryDo;
+import Singleton.Singleton;
 import modell.DAOCategory;
-import modell.Modell;
+import modell.ModelFactory;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ControllerCategories implements InterfaceCategoryController {
-    DAOCategory dao;
 
     private Singleton singleton;
 
-    BisnesObjectCategory bocategory;
-    public ControllerCategories()
+    private ArrayList<BisnesObjectCategory> bocategory;
+
+    private ModelFactory modelFactory;
+
+    public ControllerCategories(ModelFactory ModelF)
     {
-        dao=new DAOCategory();
-        singleton=Singleton.getInstance(dao.getall());
-    }
-    public ControllerCategories(DAOCategory dao)
-    {
-       this.dao=dao;
-        singleton=Singleton.getInstance(dao.getall());
+        this.modelFactory=ModelFactory.getModel(1);
     }
     @Override
     public int categoryfindbyname(String name) {

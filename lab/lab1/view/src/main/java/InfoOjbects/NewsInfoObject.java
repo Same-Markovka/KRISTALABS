@@ -1,7 +1,6 @@
 package InfoOjbects;
 
 import Facade.Facade;
-import Typeofdata.News;
 
 import java.util.ArrayList;
 

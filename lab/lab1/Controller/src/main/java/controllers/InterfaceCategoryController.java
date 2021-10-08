@@ -1,5 +1,7 @@
 package controllers;
 
+import BO.BisnesObjectCategory;
+
 import java.util.ArrayList;
 
 public interface InterfaceCategoryController {

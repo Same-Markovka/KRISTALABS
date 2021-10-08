@@ -1,11 +1,12 @@
 package Facade;
 
-import Typeofdata.News;
+import DO.CategoryDo;
+import DO.NewsDo;
 import controllers.ControllerCategories;
 import controllers.ControllerNews;
 import controllers.InterfaceCategoryController;
 import controllers.InterfaceNewsController;
-import modell.Modell;
+import modell.ModelFactory;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -18,36 +19,20 @@ public class Facade implements  FacadeInteface{
     @Inject
     private InterfaceCategoryController controllercategories;
 
+    @Inject
+    private ModelFactory modelFactory;
 //    public ControllerNews getControllerNews() {
 //        return (ControllerNews) controllerNews;
 //    }
 
     public Facade()
     {
-        Modell modell=new Modell();
-        controllerNews=new ControllerNews(modell);
-        controllercategories=new ControllerCategories(modell);
+
+        controllerNews=new ControllerNews(modelFactory);
+        controllercategories=new ControllerCategories(modelFactory);
         //System.out.println(currentdateformat.format(currentdate));
     }
-    public Facade(Modell modell){
-        controllerNews=new ControllerNews(modell);
-        controllercategories=new ControllerCategories(modell);
-    }
 
-    @Override
-    public void addnewnew(String line) {
-        controllerNews.addnewnew(line);
-    }
 
-    @Override
-    public News getnewbyname(String line)
-    {
-        return controllerNews.getnewbytext(line);
-    }
-
-    @Override
-    public ArrayList<News> getnewslist(){
-        return controllerNews.getnewslist();
-    }
 
 }

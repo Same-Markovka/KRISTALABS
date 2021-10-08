@@ -1,67 +1,64 @@
 package controllers;
 
-import Typeofdata.News;
-import modell.ModelInterface;
-import modell.Modell;
+import BO.BisnesObjectNews;
+import DO.NewsDo;
+import modell.ModelFactory;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ControllerNews implements InterfaceNewsController {
-    private BisnesObjectNews bonews;
-    @Inject
-    private ModelInterface modell;
+    private ArrayList<BisnesObjectNews> bonews;
 
-    public void setModell(Modell modell)
+    ArrayList<BisnesObjectNews> getBonews()
     {
-        this.modell=modell;
-    }
-    public Modell getModell()
-    {
-        return (Modell) modell;
+        return bonews;
     }
 
-    public ControllerNews(Modell model)
+    private ModelFactory modelFactory;
+
+    public ControllerNews(ModelFactory modelFactory)
     {
-     this.modell=model;
+        this.modelFactory=modelFactory;
     }
 
-    public ControllerNews(Object o)
-    {
-        modell=new Modell();
-    }
+
 
     @Override
-    public void addnewnew(String text)
+    public void addnewnew(BisnesObjectNews bo)
     {
-        this.modell.getNews().add(new BisnesObjectNews(text,"","",modell.getNews().size()));
+        modelFactory.getNewsDao().getall().add(new NewsDo(modelFactory.getNewsDao().getall().size(),bo.getAuthor(),bo.getTitle(),bo.getMessage(),bo.getPublucationdate()));
     }
 
     @Override
     public BisnesObjectNews getnewbytext(String text)
     {
-
-
-        else return null;
+        for(NewsDo donews:modelFactory.getNewsDao().getall())
+        {
+            if(donews.getMessage().contains(text)) return new BisnesObjectNews(donews.getAuthor(),donews.getTitle(),donews.getMessage(),donews.getPublucationdate());
+        }
+        return null;
     }
 
     @Override
-    public ArrayList<News> getnewslist()
+    public ArrayList<BisnesObjectNews> getnewslist()
     {
-        return modell.getNews();
+        for(NewsDo newsDo:modelFactory.getNewsDao().getall())
+        {
+            bonews.add(new BisnesObjectNews(newsDo.getAuthor(),newsDo.getTitle(),newsDo.getMessage(),newsDo.getPublucationdate()));
+        }
+        return bonews;
     }
 
     @Override
-    public void newschange(int newsnum, String text)
+    public void newschange(int id, String text)
     {
-        modell.getNews().get(newsnum).setMaintext(text);
+        modelFactory.getNewsDao().get(id).setMessage(text);
     }
 
     @Override
     public void deletenew(int num)
     {
-        modell.getNews().remove(num);
+        modelFactory.getNewsDao().getall().remove(num);
     }
 }
 
