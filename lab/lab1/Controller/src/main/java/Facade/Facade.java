@@ -10,6 +10,8 @@ import modell.ModelFactory;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Facade implements  FacadeInteface{
 
@@ -24,7 +26,23 @@ public class Facade implements  FacadeInteface{
 //    public ControllerNews getControllerNews() {
 //        return (ControllerNews) controllerNews;
 //    }
+    String sadWords[]={"Смерть","Грустно"};
+    String selectedAuthors[]={"Тост"};
 
+
+    private Date remove7Days()
+    {
+        Calendar c=Calendar.getInstance();
+        c.add(Calendar.DAY_OF_MONTH,-7);
+        Date d=new Date();
+        d.setTime(c.getTime().getTime());
+        return d;
+    };
+    public void getNewsController()
+    {
+
+    }
+    Date publicationdate=remove7Days();
     public Facade()
     {
 

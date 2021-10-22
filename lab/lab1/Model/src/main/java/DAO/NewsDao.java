@@ -1,10 +1,18 @@
 package DAO;
 
 import DO.NewsDo;
+import Provider.IProvider;
 
 import java.util.ArrayList;
 
 public class NewsDao implements Dao<NewsDo> {
+
+    private String entityName= "news";
+    private IProvider provider;
+    public NewsDo update(NewsDo newsDo)
+    {
+        return provider.;
+    }
 
     @Override
     public ArrayList<NewsDo> getall() {
